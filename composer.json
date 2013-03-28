@@ -1,5 +1,5 @@
 {
 	"require": {
-		"react/http-client": "v0.2.6"
+		"guzzle/http": "v3.3.1"
 	}
 }

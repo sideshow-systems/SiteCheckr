@@ -3,21 +3,19 @@
 // Get composer autoloader
 require 'vendor/autoload.php';
 
+use Guzzle\Http\Client;
 
-$loop = React\EventLoop\Factory::create();
+// Create a client and provide a base URL
+$client = new Client('http://validator.w3.org/check');
 
-$dnsResolverFactory = new React\Dns\Resolver\Factory();
-$dnsResolver = $dnsResolverFactory->createCached('8.8.8.8', $loop);
+$params = array(
+	'uri'	=> 'http://www.sideshow-systems.de'
+);
+$request = $client->post('/', null, $params);
+$response = $request->send();
 
-$factory = new React\HttpClient\Factory();
-$client = $factory->create($loop, $dnsResolver);
+//echo "<pre>";
+echo $response->getBody();
+//echo "</pre>";
 
-$request = $client->request('GET', 'https://github.com/');
-print_r($request);
-$request->on('response', function ($response) {
-	$response->on('data', function ($data) {
-		print_r($data);
-	});
-});
-$request->end();
 ?>
