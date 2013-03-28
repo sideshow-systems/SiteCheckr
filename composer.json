@@ -1,0 +1,5 @@
+{
+	"require": {
+		"react/http-client": "v0.2.6"
+	}
+}
